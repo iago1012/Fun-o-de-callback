@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <title>Minhas Atividades JS</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f2f2f2;
+      margin: 20px;
+    }
+    section {
+      background-color: white;
+      border: 1px solid #ccc;
+      padding: 20px;
+      margin-bottom: 25px;
+      border-radius: 10px;
+      box-shadow: 2px 2px 6px rgba(0,0,0,0.1);
+    }
+    h2 {
+      margin-top: 0;
+      color: #333;
+    }
+    button {
+      padding: 8px 15px;
+      margin: 5px;
+      border-radius: 8px;
+      border: none;
+      background-color: #4CAF50;
+      color: white;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #45a049;
+    }
+    input, textarea {
+      width: 100%;
+      padding: 8px;
+      margin: 6px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Atividade 1 -->
+  <section>
+    <h2>🎨 1. Trocar Cor de Fundo</h2>
+    <button onclick="trocarCorDeFundo()">Clique aqui para mudar a vibe</button>
+  </section>
+
+  <!-- Atividade 2 -->
+  <section>
+    <h2>💬 2. Mostrar Texto Digitado</h2>
+    <input type="text" id="entradaTexto" placeholder="Escreve algo aí...">
+    <button onclick="mostrarTextoDigitado()">Mostrar na tela</button>
+    <p id="paragrafoTexto"></p>
+  </section>
+
+  <!-- Atividade 3 -->
+  <section>
+    <h2>🔢 3. Contador Interativo</h2>
+    <button onclick="atualizarContador(-1)">➖</button>
+    <span id="contadorValor">0</span>
+    <button onclick="atualizarContador(1)">➕</button>
+  </section>
+
+  <!-- Atividade 4 -->
+  <section>
+    <h2>🌈 4. Digite uma Cor</h2>
+    <input type="text" id="campoCor" placeholder="Ex: red, blue, green...">
+  </section>
+
+  <!-- Atividade 5 -->
+  <section>
+    <h2>📬 5. Formulário de Contato</h2>
+    <form onsubmit="enviarDadosFormulario(event)">
+      <input type="text" id="campoNome" placeholder="Seu nome">
+      <input type="email" id="campoEmail" placeholder="Seu e-mail">
+      <textarea id="campoMensagem" placeholder="Escreva sua mensagem..."></textarea>
+      <button type="submit">Enviar Mensagem</button>
+    </form>
+    <div id="respostaFormulario"></div>
+  </section>
+
+  <script>
+    // Troca a cor de fundo da página entre azul claro e cinza claro
+    function trocarCorDeFundo() {
+      const corAtual = document.body.style.backgroundColor;
+      document.body.style.backgroundColor = corAtual === 'lightblue' ? '#f2f2f2' : 'lightblue';
+    }
+
+    // Mostra o que o usuário digitou no parágrafo
+    function mostrarTextoDigitado() {
+      const texto = document.getElementById("entradaTexto").value;
+      document.getElementById("paragrafoTexto").innerText = texto;
+    }
+
+    // Atualiza o contador na tela
+    let contador = 0;
+    function atualizarContador(valor) {
+      contador += valor;
+      document.getElementById("contadorValor").innerText = contador;
+    }
+
+    // Muda o fundo quando o usuário digita uma cor e pressiona Enter
+    document.getElementById("campoCor").addEventListener("keypress", function(evento) {
+      if (evento.key === "Enter") {
+        document.body.style.backgroundColor = this.value;
+      }
+    });
+
+    // Exibe os dados do formulário na tela sem recarregar a página
+    function enviarDadosFormulario(evento) {
+      evento.preventDefault(); // Evita que a página recarregue
+
+      const nome = document.getElementById("campoNome").value;
+      const email = document.getElementById("campoEmail").value;
+      const mensagem = document.getElementById("campoMensagem").value;
+
+      const saida = `
+        <p><strong>Nome:</strong> ${nome}</p>
+        <p><strong>Email:</strong> ${email}</p>
+        <p><strong>Mensagem:</strong> ${mensagem}</p>
+        <p>✅ Mensagem enviada com sucesso!</p>
+      `;
+
+      document.getElementById("respostaFormulario").innerHTML = saida;
+    }
+  </script>
+
+</body>
+</html>
